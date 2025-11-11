@@ -5,7 +5,7 @@ import QuestionsList from "./components/QuestionsList";
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
-function App() {
+const App = () => {
   const [topic, setTopic] = useState("");
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
