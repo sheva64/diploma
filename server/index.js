@@ -50,4 +50,4 @@ app.post("/generate-test", async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`✅ Сервер запущено на http://localhost:${port}`));
+app.listen(port, () => console.log(`Сервер запущено на http://localhost:${port}`));

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import TopicInput from "./components/TopicInput";
+import QuestionsList from "./components/QuestionsList";
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
@@ -53,50 +55,21 @@ function App() {
 
   return (
     <div>
-      <h1>AI Test Generator (Gemini)</h1>
-      <p>Введи тему тесту:</p>
-      <input
-        type="text"
-        value={topic}
-        onChange={(e) => setTopic(e.target.value)}
-        placeholder="Наприклад: React або Алгоритми сортування"
+      <h1>AI Test Generator</h1>
+      <TopicInput
+        topic={topic}
+        setTopic={setTopic}
+        generateTest={generateTest}
+        loading={loading}
       />
-      <button onClick={generateTest} disabled={loading}>
-        {loading ? "Генерується..." : "Згенерувати тест"}
-      </button>
-
-      {questions.length > 0 && (
-        <div>
-          <h2>Тест по темі: {topic}</h2>
-          {questions.map((q, index) => (
-            <div key={index}>
-              <p>{q.question}</p>
-              {q.options.map((opt, idx) => (
-                <label key={idx}>
-                  <input
-                    type="radio"
-                    name={`q-${index}`}
-                    checked={answers[index] === opt}
-                    onChange={() => handleAnswer(index, opt)}
-                  />
-                  {opt}
-                </label>
-              ))}
-              {showResults && (
-                <p>
-                  {answers[index] === q.correct
-                    ? "✅ Правильно!"
-                    : `❌ Неправильно. Правильна відповідь: ${q.correct}`}
-                </p>
-              )}
-              <hr />
-            </div>
-          ))}
-          {!showResults && (
-            <button onClick={checkAnswers}>Перевірити відповіді</button>
-          )}
-        </div>
-      )}
+      <QuestionsList
+        topic={topic}
+        questions={questions}
+        answers={answers}
+        handleAnswer={handleAnswer}
+        showResults={showResults}
+        checkAnswers={checkAnswers}
+      />
     </div>
   );
 }
