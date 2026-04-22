@@ -3,7 +3,7 @@ import QuestionItem from "./QuestionItem";
 
 const QuestionsList = ({ topic, questions, answers, handleAnswer, showResults, checkAnswers }) => {
     return (
-      <div>
+      <div className="questions-container">
         <h2>Тест по темі: {topic}</h2>
         {questions.map((q, index) => (
           <QuestionItem
@@ -17,10 +17,12 @@ const QuestionsList = ({ topic, questions, answers, handleAnswer, showResults, c
         ))}
 
         {!showResults && (
-          <button onClick={checkAnswers}>Перевірити відповіді</button>
+          <button className="check-button" onClick={checkAnswers}>
+            Перевірити відповіді
+          </button>
         )}
-    </div>
+      </div>
     )
 }
 
-export default QuestionsList
+export default QuestionsList;

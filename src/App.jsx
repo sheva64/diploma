@@ -54,7 +54,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="app-container">
       <h1>AI Test Generator</h1>
       <TopicInput
         topic={topic}
@@ -62,16 +62,18 @@ const App = () => {
         generateTest={generateTest}
         loading={loading}
       />
-      <QuestionsList
-        topic={topic}
-        questions={questions}
-        answers={answers}
-        handleAnswer={handleAnswer}
-        showResults={showResults}
-        checkAnswers={checkAnswers}
-      />
+      {/* Показуємо список питань тільки якщо вони є */}
+      {questions.length > 0 && (
+        <QuestionsList
+          topic={topic}
+          questions={questions}
+          answers={answers}
+          handleAnswer={handleAnswer}
+          showResults={showResults}
+          checkAnswers={checkAnswers}
+        />
+      )}
     </div>
   );
 }
-
 export default App;
